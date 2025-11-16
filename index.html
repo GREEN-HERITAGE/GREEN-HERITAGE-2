@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>エゴマチミチュリソース - 韓国の伝統と南米の情熱の出会い</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #064834;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(254, 247, 232, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(6, 72, 52, 0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+        }
+
+        nav a {
+            color: #064834;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #AD8E68;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #064834 0%, #0a6045 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: #FEF7E8;
+            z-index: 2;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .hero-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+        }
+
+        .floating-leaf {
+            position: absolute;
+            opacity: 0.2;
+            animation: float 6s infinite ease-in-out;
+        }
+        
+        .floating-leaf::before {
+            content: '🌿';
+            font-size: 60px;
+            display: block;
+        }
+
+        .leaf1 { top: 10%; left: 5%; animation-delay: 0s; }
+        .leaf1::before { font-size: 70px; }
+        
+        .leaf2 { top: 20%; right: 8%; animation-delay: 2s; }
+        .leaf2::before { font-size: 55px; }
+        
+        .leaf3 { top: 50%; left: 10%; animation-delay: 4s; }
+        .leaf3::before { font-size: 65px; }
+        
+        .leaf4 { top: 70%; left: 15%; animation-delay: 1s; }
+        .leaf4::before { font-size: 60px; }
+        
+        .leaf5 { bottom: 10%; left: 40%; animation-delay: 3s; }
+        .leaf5::before { font-size: 75px; }
+        
+        .leaf6 { top: 40%; right: 15%; animation-delay: 5s; }
+        .leaf6::before { font-size: 50px; }
+        
+        .leaf7 { top: 80%; right: 20%; animation-delay: 1.5s; }
+        .leaf7::before { font-size: 68px; }
+        
+        .leaf8 { bottom: 25%; right: 5%; animation-delay: 3.5s; }
+        .leaf8::before { font-size: 58px; }
+
+        /* Common Section Styles */
+        section {
+            padding: 100px 50px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .section-content {
+            max-width: 1200px;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .section-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Company Introduction */
+        #company {
+            background: #FEF7E8;
+        }
+
+        #company h2 {
+            font-size: 3em;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #064834;
+        }
+
+        #company .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        #company p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .image-placeholder {
+            background: #AD8E68;
+            border-radius: 20px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FEF7E8;
+            font-size: 1.2em;
+            box-shadow: 0 20px 60px rgba(6, 72, 52, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .image-placeholder:hover {
+            transform: scale(1.05);
+        }
+
+        /* Product Section */
+        #product {
+            background: linear-gradient(to bottom, #FEF7E8, #ffffff);
+        }
+
+        #product h2 {
+            font-size: 3em;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .product-showcase {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 80px;
+        }
+
+        .product-image {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .product-features {
+            flex: 1;
+        }
+
+        .feature-item {
+            background: white;
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            border-left: 5px solid #064834;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transform: translateX(-30px);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .feature-item.visible {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .feature-item h3 {
+            color: #064834;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+
+        /* Perilla Benefits */
+        #benefits {
+            background: #064834;
+            color: #FEF7E8;
+        }
+
+        #benefits h2 {
+            font-size: 3em;
+            margin-bottom: 60px;
+            text-align: center;
+            color: #FEF7E8;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .benefit-card {
+            background: rgba(254, 247, 232, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(173, 142, 104, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            background: rgba(254, 247, 232, 0.15);
+        }
+
+        .benefit-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #AD8E68;
+        }
+
+        /* Usage Section */
+        #usage {
+            background: #FEF7E8;
+        }
+
+        #usage h2 {
+            font-size: 3em;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .usage-carousel {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .usage-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+        }
+
+        .usage-card:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .usage-card .image-placeholder {
+            height: 250px;
+            border-radius: 0;
+        }
+
+        .usage-card-content {
+            padding: 30px;
+        }
+
+        .usage-card h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #064834;
+        }
+
+        /* Purchase CTA */
+        #purchase {
+            background: linear-gradient(135deg, #AD8E68 0%, #8a7355 100%);
+            text-align: center;
+            color: #FEF7E8;
+        }
+
+        #purchase h2 {
+            font-size: 3.5em;
+            margin-bottom: 30px;
+        }
+
+        #purchase p {
+            font-size: 1.5em;
+            margin-bottom: 50px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #064834;
+            color: #FEF7E8;
+            padding: 25px 80px;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            background: #053a2a;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5em; }
+            .hero p { font-size: 1.2em; }
+            #company .content-grid,
+            .product-showcase {
+                grid-template-columns: 1fr;
+            }
+            .usage-carousel {
+                grid-template-columns: 1fr;
+            }
+            nav ul {
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+            section {
+                padding: 80px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#company">会社紹介</a></li>
+            <li><a href="#product">製品</a></li>
+            <li><a href="#benefits">エゴマの効能</a></li>
+            <li><a href="#usage">活用法</a></li>
+            <li><a href="#purchase">購入</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="floating-leaf leaf1"></div>
+        <div class="floating-leaf leaf2"></div>
+        <div class="floating-leaf leaf3"></div>
+        <div class="floating-leaf leaf4"></div>
+        <div class="floating-leaf leaf5"></div>
+        <div class="floating-leaf leaf6"></div>
+        <div class="floating-leaf leaf7"></div>
+        <div class="floating-leaf leaf8"></div>
+        <div class="hero-content">
+            <h1>エゴマチミチュリソース</h1>
+            <p>フレッシュフレーバー革命＆韓国フュージョンBBQソース</p>
+        </div>
+    </div>
+
+    <!-- Company Introduction -->
+    <section id="company">
+        <div class="section-content">
+            <h2>私たちのストーリー</h2>
+            <div class="content-grid">
+                <div>
+                    <p>グリーンヘリテージは、新鮮なエゴマ、サンチュなどのプレミアム製品を販売し、葉野菜から加工食品や機能性成分を企画・開発しています。</p>
+                    <p>私たちのブランド哲学は「実験的遺産(Experimental Heritage)」です。グリーンヘリテージは、先祖から受け継いだ農業遺産を継承し、食品を超えて化粧品や高機能性成分へと拡大し、豊かな文化遺産を次世代に伝えることを目指しています。</p>
+                </div>
+                <div style="background: white; padding: 40px; border-radius: 20px; height: 400px; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 60px rgba(6, 72, 52, 0.2); transition: transform 0.3s;">
+                    <img src="https://github.com/user-attachments/assets/15171c1d-5f4e-4288-b807-f4e6e484ae4b" alt="Green Heritage Logo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product -->
+    <section id="product">
+        <div class="section-content">
+            <h2>プレミアムエゴマチミチュリ</h2>
+            <div style="display: flex; flex-direction: column; gap: 50px; align-items: center;">
+                <!-- Product Images - Add your images here -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%; max-width: 900px;">
+                    <div style="height: 400px; display: flex; align-items: center; justify-content: center; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(6, 72, 52, 0.2); background: #f0f0f0;">
+                        <img src="https://github.com/user-attachments/assets/1a23b3df-384a-4b87-b49c-fcf4f19765d9" alt="Product Image 1" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="height: 400px; display: flex; align-items: center; justify-content: center; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(6, 72, 52, 0.2); background: #f0f0f0;">
+                        <img src="https://github.com/user-attachments/assets/fdd2af67-0d66-4f68-93e6-b0e9b2d47d58" alt="Product Image 2" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                </div>
+                
+                <!-- Product Features -->
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; width: 100%;">
+                    <div class="feature-item">
+                        <h3>🌿 100%韓国産エゴマ</h3>
+                        <p>厳選された新鮮な韓国産エゴマの葉、自社農場での直接栽培</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🍃 プレミアムハーブブレンド</h3>
+                        <p>エゴマ、オイル、ニンニクの完璧な調和</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>✨ 無添加天然ソース</h3>
+                        <p>人工添加物を使用しない自然そのままの味</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Perilla Benefits -->
+    <section id="benefits">
+        <div class="section-content">
+            <h2>エゴマの驚くべき効能</h2>
+            
+            <!-- Wide Image Section -->
+            <div style="width: 100%; margin-bottom: 60px;">
+                <div style="height: 300px; display: flex; align-items: center; justify-content: center; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); background: rgba(254, 247, 232, 0.1);">
+                    <img src="https://github.com/user-attachments/assets/75004b80-0918-4c1e-afbf-fa70be856f9c" alt="Perilla Benefits Banner" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🛡️</div>
+                    <h3>抗酸化作用</h3>
+                    <p>豊富なポリフェノールでアンチエイジング</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💊</div>
+                    <h3>抗炎症・抗アレルギー効果</h3>
+                    <p>炎症反応を抑制し、アトピーや喘息に効果的</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🌿</div>
+                    <h3>消化・解毒サポート</h3>
+                    <p>胃のガスを減らし、二日酔いを和らげる</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💪</div>
+                    <h3>骨の健康</h3>
+                    <p>カルシウムとマグネシウムが豊富</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Usage -->
+    <section id="usage">
+        <div class="section-content">
+            <h2>無限の可能性</h2>
+            <div class="usage-carousel">
+                <div class="usage-card">
+                    <div class="image-placeholder" style="background: none; padding: 0;">
+                        <img src="https://github.com/user-attachments/assets/9967517f-13b8-467c-96a8-b4ad3f279ba7" alt="Grilled steak" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="usage-card-content">
+                        <h3>グリル＆ステーキ</h3>
+                        <p>ジューシーな肉との完璧な相性</p>
+                    </div>
+                </div>
+                <div class="usage-card">
+                    <div class="image-placeholder" style="background: none; padding: 0;">
+                        <img src="https://github.com/user-attachments/assets/2beb87de-bf85-4432-a9d7-899597c6f106" alt="Salad" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="usage-card-content">
+                        <h3>サラダドレッシング</h3>
+                        <p>新鮮な野菜に生き生きとした風味をプラス</p>
+                    </div>
+                </div>
+                <div class="usage-card">
+                    <div class="image-placeholder" style="background: none; padding: 0;">
+                        <img src="https://github.com/user-attachments/assets/5470d0e2-f818-4b7d-874b-23ecad31a14a" alt="Pasta" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="usage-card-content">
+                        <h3>パスタ＆パン</h3>
+                        <p>イタリア料理とバゲットに韓国の感性をプラス</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Purchase CTA -->
+    <section id="purchase">
+        <div class="section-content">
+            <h2>今すぐ体験しよう</h2>
+            <p>あなたの食卓を特別にする新しい味の発見</p>
+            <a href="https://buykorea.org/ec/prd/selectGoodsDetail.do?goodsSn=3759109" target="_blank" class="cta-button">今すぐ購入</a>
+            
+            <div style="margin-top: 60px; display: flex; justify-content: center; gap: 30px; align-items: center;">
+                <a href="https://www.linkedin.com/company/109550097/admin/analytics/followers/" target="_blank" style="display: flex; align-items: center; gap: 10px; color: #FEF7E8; text-decoration: none; font-size: 1.1em; padding: 15px 30px; background: rgba(254, 247, 232, 0.1); border-radius: 50px; transition: all 0.3s ease; border: 2px solid rgba(254, 247, 232, 0.3);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                    LinkedIn
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61583818676400" target="_blank" style="display: flex; align-items: center; gap: 10px; color: #FEF7E8; text-decoration: none; font-size: 1.1em; padding: 15px 30px; background: rgba(254, 247, 232, 0.1); border-radius: 50px; transition: all 0.3s ease; border: 2px solid rgba(254, 247, 232, 0.3);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    Meta (Facebook)
+                </a>
+            </div>
+            
+            <div style="margin-top: 30px; display: flex; justify-content: center; align-items: center; gap: 10px; color: #FEF7E8; font-size: 1.1em;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+                <a href="mailto:office@greenlove.kr" style="color: #FEF7E8; text-decoration: none;">office@greenlove.kr</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Sequential animation for product features
+                    if (entry.target.querySelector('.feature-item')) {
+                        const items = entry.target.querySelectorAll('.feature-item');
+                        items.forEach((item, index) => {
+                            setTimeout(() => {
+                                item.classList.add('visible');
+                            }, index * 200);
+                        });
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all section contents
+        document.querySelectorAll('.section-content').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navigation background scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(254, 247, 232, 0.98)';
+                nav.style.boxShadow = '0 2px 30px rgba(6, 72, 52, 0.15)';
+            } else {
+                nav.style.background = 'rgba(254, 247, 232, 0.95)';
+                nav.style.boxShadow = '0 2px 20px rgba(6, 72, 52, 0.1)';
+            }
+        });
+    </script>
+</body>
+</html>
